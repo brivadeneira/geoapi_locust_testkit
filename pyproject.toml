@@ -1,0 +1,74 @@
+[build-system]
+requires = ["setuptools>=67.0"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.dynamic]
+readme = { file = ["README.md"] }
+
+[tool.setuptools.package-data]
+"*" = ["py.typed"]
+
+[tool.setuptools]
+py-modules = ["cli", "settings"]
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["conf*", "services*"]
+exclude = ["tests*", "docs*"]
+
+[project]
+name = "geoapi_locust_testkit"
+version = "0.1.0"
+authors = [{ name = "Bibiana Rivadeneira" }]
+description = "Custom locust-based python test suite for dynamic API testing with geo-faker parameter generation."
+readme = { file = "README.md", content-type = "text/markdown" }
+requires-python = ">=3.10"
+license = { file = "LICENSE" }
+
+dependencies = [
+  "jinja2",
+  "pydantic~=2.0",
+  "pydantic-settings",
+  "typer",
+]
+
+[dependency-groups]
+dev = [
+  "pytest",
+  "pytest-asyncio",
+  "pytest-cov",
+  "pytest-pretty",
+  "mypy",
+  "ruff",
+  "toml-sort",
+  "tombi>=0.9.4",
+]
+
+[project.scripts]
+geoapi_locust_testkit = "cli:app"
+
+[tool.ruff]
+exclude = [".venv"]
+line-length = 120
+
+[tool.coverage.run]
+concurrency = ["thread", "greenlet"]
+omit = [
+  "./tests/*",
+]
+
+[tool.pytest.ini_options]
+asyncio_default_fixture_loop_scope = "function"
+
+[tool.mypy]
+check_untyped_defs = true
+disallow_incomplete_defs = true
+disallow_untyped_defs = true
+no_implicit_optional = true
+plugins = ["pydantic.mypy"]
+strict_optional = true
+warn_return_any = true
+warn_unused_ignores = true
+
+[tool.uv]
+exclude-newer = "2026-03-13T00:00:00Z"
