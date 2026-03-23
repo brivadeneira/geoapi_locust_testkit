@@ -1,5 +1,5 @@
 repos:
-  # General cleanup hooks
+  # general cleanup hooks
   - repo: https://github.com/pre-commit/pre-commit-hooks
     rev: v5.0.0
     hooks:
@@ -11,13 +11,13 @@ repos:
           - --branch
           - main
 
-  # Spelling
+  # spelling
   - repo: https://github.com/codespell-project/codespell
     rev: v2.4.1
     hooks:
       - id: codespell
         args:
-          - --ignore-words-list=
+          - --skip=services/datasets/*
 
   # YAML linting
   - repo: https://github.com/adrienverge/yamllint
@@ -28,7 +28,7 @@ repos:
           - --config-data
           - "{extends: default, rules: {line-length: {max: 120}}}"
 
-  # Python linting & formatting
+  # python linting & formatting
   - repo: https://github.com/astral-sh/ruff-pre-commit
     rev: v0.14.5
     hooks:
@@ -37,21 +37,21 @@ repos:
           - --fix
         language_version: python3.11
 
-  # Type checking (manual)
+  # type checking (manual)
   - repo: https://github.com/pre-commit/mirrors-mypy
     rev: v1.15.0
     hooks:
       - id: mypy
         stages: [manual]
 
-  # Detect secrets
+  # detect secrets
   - repo: https://github.com/Yelp/detect-secrets
     rev: v1.5.0
     hooks:
       - id: detect-secrets
         args: [--baseline, .secrets.baseline]
 
-  # Project‑specific UV commands
+  # project-specific uv commands
   - repo: local
     hooks:
       - id: pytest
@@ -59,6 +59,7 @@ repos:
         entry: uv run pytest
         language: system
         pass_filenames: false
+
       - id: tomlsort
         name: TOML sorting/lint
         entry: uv run tombi lint pyproject.toml

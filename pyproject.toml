@@ -2,20 +2,6 @@
 requires = ["setuptools>=67.0"]
 build-backend = "setuptools.build_meta"
 
-[tool.setuptools.dynamic]
-readme = { file = ["README.md"] }
-
-[tool.setuptools.package-data]
-"*" = ["py.typed"]
-
-[tool.setuptools]
-py-modules = ["cli", "settings"]
-
-[tool.setuptools.packages.find]
-where = ["."]
-include = ["conf*", "services*"]
-exclude = ["tests*", "docs*"]
-
 [project]
 name = "geoapi_locust_testkit"
 version = "0.1.0"
@@ -32,6 +18,9 @@ dependencies = [
   "typer",
 ]
 
+[project.scripts]
+geoapi_locust_testkit = "cli:app"
+
 [dependency-groups]
 dev = [
   "pytest",
@@ -42,10 +31,28 @@ dev = [
   "ruff",
   "toml-sort",
   "tombi>=0.9.4",
+  "faker>=40.8.0",
+  "shapely>=2.1.2",
+  "geopandas>=1.1.3",
+  "pydantic>=2.12.5",
+  "pydantic-settings>=2.13.1",
 ]
 
-[project.scripts]
-geoapi_locust_testkit = "cli:app"
+# Tooling
+
+[tool.setuptools]
+py-modules = ["cli", "settings"]
+
+[tool.setuptools.dynamic]
+readme = { file = ["README.md"] }
+
+[tool.setuptools.package-data]
+"*" = ["py.typed"]
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["conf*", "services*"]
+exclude = ["tests*", "docs*"]
 
 [tool.ruff]
 exclude = [".venv"]
@@ -57,7 +64,7 @@ omit = [
   "./tests/*",
 ]
 
-[tool.pytest.ini_options]
+[tool.pytest]
 asyncio_default_fixture_loop_scope = "function"
 
 [tool.mypy]
