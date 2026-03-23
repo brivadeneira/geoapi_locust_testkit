@@ -134,7 +134,7 @@ class FakeGeoGenerator:
         if not value:
             return None
 
-        cleaned = str(value).replace("\n", " ").replace("\r", " ")
+        cleaned = str(value).replace("\n", ", ").replace("\r", " ")
         cleaned = re.sub(r"\s+", " ", cleaned).strip()
 
         return cleaned

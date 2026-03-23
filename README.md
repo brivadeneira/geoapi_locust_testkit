@@ -5,10 +5,6 @@
 # geoapi_locust_testkit
 Custom locust-based python test suite for dynamic API testing with geo-faker parameter generation.
 
-## Introduction
-
-## Features
-
 # Geodata generator
 
 ## Features
@@ -64,14 +60,15 @@ Custom locust-based python test suite for dynamic API testing with geo-faker par
 >>> print(f"Generated coordinates: ({lat}, {lon}): https://www.openstreetmap.org/?mlat={lat}&mlon={lon}&zoom={7}")
 
 # Generated coordinates:
-# (-51.57757752514003, -59.26370453286179)
-# https://www.openstreetmap.org/?mlat=-51.57757752514003&mlon=-59.26370453286179&zoom=7
+# (-53.4128363731412, -60.06591921812708)
+# Generated coordinates: (-53.4128363731412, -60.06591921812708): https://www.openstreetmap.org/?mlat=-53.4128363731412&mlon=-60.06591921812708&zoom=5
 ```
 
 [![](img/malvinas_argentinas_ex.png)](https://www.openstreetmap.org/?mlat=-51.57757752514003&mlon=-59.26370453286179&zoom=7)
 
 ### Generate a random address
 ```python
+>>> from urllib.parse import quote
 >>> from services.geo_data_generator import FakeGeoGenerator
 
 >>> fake_geo_generator = FakeGeoGenerator(seed=42)
@@ -81,14 +78,12 @@ Custom locust-based python test suite for dynamic API testing with geo-faker par
 ...     print(fake_geo_generator.gen_address(real=False))
 ...     print()
 ...
-# Diagonal 9 N° 71 Piso 1 Dto. 5
-# Salta 4400, Salta
+# Diagonal 9 N° 71 Piso 1 Dto, 5 Salta 4400, Salta
 
-# Diagonal Tierra del Fuego N° 835 Piso 4 Dto. 4
-# Constitución 1004, Ciudad Autónoma de Buenos Aires
+# Diagonal Tierra del Fuego N° 835 Piso 4 Dto. 4, Constitución 1004, Ciudad Autónoma de Buenos Aires
 
-# Avenida Río Gallegos N° 721
-# Santa Fe 3000, Santa Fe
+# Avenida Río Gallegos N° 721,Santa Fe 3000, Santa Fe
+```
 
 ### Generate a random address with real address option enabled
 ```python
@@ -97,14 +92,17 @@ Custom locust-based python test suite for dynamic API testing with geo-faker par
 >>> fake_geo_generator = FakeGeoGenerator(seed=42)
 >>> print("\nGenerated real addresses:")
 >>> for _ in range(3):
-...     print(fake_geo_generator.gen_address(real=True))
+...     print(f"real_address: {fake_geo_generator.gen_address(real=True)}")
+...     print()
+
+
 # WAILING RD 35, VG1110, BRITISH VIRGIN ISLANDS
 # VIA A. NICOLODI 2, city_of_verona, 37124, ITA
 # Waidhofnerstraße 1, Kautzen, 3851, AUT
 ```
 
 
-### Generate a random address with real address option enabled
+### Generate a geo context
 ```python
 >>> from services.geo_data_generator import FakeGeoGenerator
 
