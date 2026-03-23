@@ -3,8 +3,8 @@ import pytest
 
 class TestGeoSettings:
     @pytest.fixture(autouse=True)
-    def _setup(self, test_geo_settings):
-        self.settings = test_geo_settings
+    def _setup(self, fake_geo_settings):
+        self.settings = fake_geo_settings
 
     @pytest.mark.parametrize(
         "mandatory_attribute",

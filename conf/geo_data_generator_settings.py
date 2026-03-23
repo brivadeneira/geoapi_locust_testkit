@@ -20,9 +20,11 @@ class GeoDataGeneratorSettings(BaseSettings):
 
     @classmethod
     def default(cls) -> "GeoDataGeneratorSettings":
-        base_dir = Path.cwd() / "services" / "geo_data_generator"
-        datasets_dir = Path.cwd() / "services" / "datasets"
-        land_shapes_dir = Path.cwd() / "services" / "datasets" / "on_land_shapes_data"
+        project_root = Path(__file__).resolve().parent.parent
+
+        base_dir = project_root / "services" / "geo_data_generator"
+        datasets_dir = project_root / "services" / "datasets"
+        land_shapes_dir = project_root / "services" / "datasets" / "on_land_shapes_data"
 
         return cls(
             GEO_DATA_GENERATOR_DIR=base_dir.resolve(),

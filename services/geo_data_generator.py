@@ -1,6 +1,7 @@
 import json
 import logging
 import random
+import re
 from dataclasses import dataclass
 from pathlib import Path
 
@@ -36,7 +37,7 @@ class FakeGeoGenerator:
         chosen_locale = random.choice(self.locales)
         self.fake = Faker(chosen_locale)
 
-        self.land_polygons: list[Polygon] = []
+        self.land_polygons: list[Polygon]
         self._load_land_polygons()
 
         logger.info(
@@ -73,6 +74,9 @@ class FakeGeoGenerator:
         union = gdf.unary_union
         self.land_polygons = self._extract_polygons(union)
 
+        if not self.land_polygons:
+            raise RuntimeError(f"No land polygons could be extracted from {land_path}")
+
     @staticmethod
     def _extract_polygons(given_geometry) -> list[Polygon]:
         """
@@ -91,6 +95,9 @@ class FakeGeoGenerator:
         """
         Validate that the combination of options is logical and does not lead to contradictions.
         """
+        if invalid_value and invalid_type:
+            raise ValueError("invalid_value and invalid_type cannot be True at the same time")
+
         if (invalid_value or invalid_type) and (on_land or bbox):
             raise ValueError("invalid_value/invalid_type cannot be combined with on_land or bbox")
 
@@ -113,16 +120,24 @@ class FakeGeoGenerator:
             f"{self.settings.MAX_TRIES_COORDINATES_IN_AREA} attempts"
         )
 
+    import re
+
     def _clean_address_str(self, value: str | None) -> str | None:
         """
-        Clean an address component string by stripping whitespace and returning None if it's empty.
+        Clean an address component string by:
+        - converting None to None
+        - stripping leading/trailing whitespace
+        - replacing line breaks with a single space
+        - collapsing multiple spaces into a single space
+        - returning None if the resulting string is empty
         """
-        if value is None:
+        if not value:
             return None
 
-        value = str(value).strip()
+        cleaned = str(value).replace("\n", " ").replace("\r", " ")
+        cleaned = re.sub(r"\s+", " ", cleaned).strip()
 
-        return value if value else None
+        return cleaned
 
     def gen_coordinates(
         self,
@@ -157,7 +172,7 @@ class FakeGeoGenerator:
                 self.fake.boolean(),
                 self.fake.date(),
                 self.fake.time(),
-                self.fake.datetime(),
+                self.fake.date_time(),
             ]
 
             random_not_float_for_latitude = random.choice(not_float_values)
@@ -299,5 +314,5 @@ class FakeGeoGenerator:
         return {
             "latitude": lat,
             "longitude": lon,
-            "full_address": self.gen_address(real=real_address, address_source_file=addresses_file),
+            "address": self.gen_address(real=real_address, address_source_file=addresses_file),
         }
