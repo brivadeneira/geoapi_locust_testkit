@@ -1,0 +1,28 @@
+api:
+  base_url:
+    - dev: https://nominatim.openstreetmap.org
+    - stg: null
+    - prod: null
+
+  endpoints:
+    - name: search
+      path: /search
+      method: GET
+      params:
+        q: "{{ address }}"
+        format: jsonv2
+        limit: 1
+
+    - name: reverse
+      path: /reverse
+      method: GET
+      params:
+        lat: "{{ latitude }}"
+        lon: "{{ longitude }}"
+        format: jsonv2
+
+      bbox:
+        xmin: -31.3
+        ymin: 34.5
+        xmax: 45.0
+        ymax: 71.2

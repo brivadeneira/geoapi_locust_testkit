@@ -13,13 +13,20 @@ class GeoDataGeneratorSettings(BaseSettings):
     DEFAULT_REAL_ADDRESSES_FILE: Path
     LAND_SHAPEFILE: Path
 
-    MAX_TRIES_COORDINATES_IN_AREA: int = 100
+    MAX_TRIES_COORDINATES_IN_AREA: int = 10
+    MAX_TRIES_ADDRESS_GENERATION: int = 5
     WORLD_LOCALES_FOR_FACTORY: list[str] = [
-        "en_US", "en_GB", "es_ES", "it_IT", "pt_BR", "es_AR"
+        # "es_ES", "it_IT",
+        # "pt_BR", "es_AR",
+        # "pt_BR",
+        "pt_PT"
     ]
 
     @classmethod
     def default(cls) -> "GeoDataGeneratorSettings":
+        """
+        Create a default instance of GeoDataGeneratorSettings with paths relative to the project root.
+        """
         project_root = Path(__file__).resolve().parent.parent
 
         base_dir = project_root / "services" / "geo_data_generator"

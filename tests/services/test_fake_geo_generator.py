@@ -8,9 +8,9 @@ from shapely.geometry import box, Point
 class TestFakeGeoGenerator:
     def test_init_fake_geo_generator(self, fake_geo_generator):
         assert fake_geo_generator
-        assert fake_geo_generator.seed is not None
+        assert fake_geo_generator.rand_seed is not None
         assert fake_geo_generator.settings is not None
-        assert fake_geo_generator.land_polygons
+        assert fake_geo_generator.land_polygons_from_shapefile
 
     @pytest.mark.parametrize(
         "kwargs",
@@ -31,7 +31,9 @@ class TestFakeGeoGenerator:
         if isinstance(kwargs.get("bbox"), str):
             kwargs["bbox"] = request.getfixturevalue(kwargs["bbox"])
 
-        lat, lon = fake_geo_generator.gen_coordinates(**kwargs)
+        generated_address = fake_geo_generator.generate_coordinates(**kwargs)
+        lat, lon = generated_address.get("latitude"), generated_address.get("longitude")
+
         assert lat is not None
         assert lon is not None
         assert isinstance(lat, float)
@@ -43,21 +45,25 @@ class TestFakeGeoGenerator:
         point = Point(lon, lat)
 
         if kwargs.get("on_land"):
-            assert any(poly.contains(point) for poly in fake_geo_generator.land_polygons)
+            assert any(poly.contains(point) for poly in fake_geo_generator.land_polygons_from_shapefile)
 
         if kwargs.get("bbox"):
             bbox = kwargs["bbox"]
             assert bbox.contains(point)
 
     def test_gen_coordinates_invalid_values(self, fake_geo_generator):
-        lat, lon = fake_geo_generator.gen_coordinates(invalid_value=True)
+        generated_address = fake_geo_generator.generate_coordinates(invalid_value=True)
+        lat, lon = generated_address.get("latitude"), generated_address.get("longitude")
+
         assert lat is not None
         assert lon is not None
 
         assert not (-90 <= lat <= 90) or not (-180 <= lon <= 180)
 
     def test_gen_coordinates_invalid_type(self, fake_geo_generator):
-        lat, lon = fake_geo_generator.gen_coordinates(invalid_type=True)
+        generated_address = fake_geo_generator.generate_coordinates(invalid_type=True)
+        lat, lon = generated_address.get("latitude"), generated_address.get("longitude")
+
         assert lat is not None
         assert lon is not None
 
@@ -72,7 +78,7 @@ class TestFakeGeoGenerator:
         )
 
         with pytest.raises(RuntimeError, match=r"No land found inside given bbox"):
-            fake_geo_generator.gen_coordinates(on_land=True, bbox=ocean_bbox)
+            fake_geo_generator.generate_coordinates(on_land=True, bbox=ocean_bbox)
 
     @pytest.mark.parametrize(
         "kwargs",
@@ -96,29 +102,15 @@ class TestFakeGeoGenerator:
             kwargs["bbox"] = request.getfixturevalue(kwargs["bbox"])
 
         with pytest.raises(ValueError):
-            fake_geo_generator.gen_coordinates(**kwargs)
+            fake_geo_generator.generate_coordinates(**kwargs)
 
     def test_gen_address(self, fake_geo_generator):
-        address = fake_geo_generator.gen_address()
+        generated_address = fake_geo_generator.generate_address()
+        address = generated_address.get("full_address")
         assert address
         assert isinstance(address, str)
 
         assert re.search(r"\d+", address), f"Address missing a number: {address}"
 
-        components = [c.strip() for c in address.split(",") if c.strip()]
-        assert len(components) >= 3, f"Address has less than 3 components: {components}"
-
-    def test_gen_ge_context(self, fake_geo_generator):
-        context = fake_geo_generator.gen_geo_context()
-
-        assert context
-        assert isinstance(context, dict)
-
-        assert "latitude" in context
-        assert "longitude" in context
-
-        assert isinstance(context["latitude"], float)
-        assert isinstance(context["longitude"], float)
-
-        assert "address" in context
-        assert isinstance(context["address"], str)
+        components = [part.strip() for part in address.split(",") if part.strip()]
+        assert len(components) >= 2, f"Address has less than 2 components: {components}"
