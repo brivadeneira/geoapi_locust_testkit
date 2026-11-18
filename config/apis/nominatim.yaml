@@ -1,8 +1,5 @@
 api:
-  base_url:
-    - dev: https://nominatim.openstreetmap.org
-    - stg: null
-    - prod: null
+  base_url: https://nominatim.openstreetmap.org
 
   endpoints:
     - name: search
@@ -22,7 +19,7 @@ api:
         format: jsonv2
 
       bbox:
-        xmin: -31.3
-        ymin: 34.5
-        xmax: 45.0
-        ymax: 71.2
+        xmin: -9.5
+        ymin: 36.9
+        xmax: -6.1
+        ymax: 42.2

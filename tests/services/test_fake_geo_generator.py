@@ -106,7 +106,7 @@ class TestFakeGeoGenerator:
 
     def test_gen_address(self, fake_geo_generator):
         generated_address = fake_geo_generator.generate_address()
-        address = generated_address.get("full_address")
+        address = generated_address.get("address")
         assert address
         assert isinstance(address, str)
 

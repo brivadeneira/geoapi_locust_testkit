@@ -16,9 +16,8 @@ class GeoDataGeneratorSettings(BaseSettings):
     MAX_TRIES_COORDINATES_IN_AREA: int = 10
     MAX_TRIES_ADDRESS_GENERATION: int = 5
     WORLD_LOCALES_FOR_FACTORY: list[str] = [
-        # "es_ES", "it_IT",
-        # "pt_BR", "es_AR",
-        # "pt_BR",
+        "es_ES", "it_IT",
+        "pt_BR", "es_AR",
         "pt_PT"
     ]
 
