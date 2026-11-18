@@ -1,8 +1,5 @@
 api:
-  base_url:
-    - dev: https://nominatim.openstreetmap.org
-    - stg: null
-    - prod: null
+  base_url: https://nominatim.openstreetmap.org
 
   endpoints:
     - name: search

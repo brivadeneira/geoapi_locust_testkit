@@ -3,7 +3,7 @@ import logging
 import random
 import re
 from dataclasses import dataclass
-from pathlib import Path
+from functools import lru_cache
 from urllib.parse import quote
 
 import geopandas as gpd
@@ -234,7 +234,7 @@ class FakeGeoGenerator:
         }
 
     def generate_address(
-            self, from_real_dataset: bool = True, address_source_file: Path | None = None
+            self, real_address: bool = True,
     ) -> dict[str, str]:
         """
         Generate a full address string based on the specified options.
@@ -244,10 +244,10 @@ class FakeGeoGenerator:
         cleaned and formatted appropriately. And a
         """
 
-        address_source_file_path = address_source_file or self.settings.DEFAULT_REAL_ADDRESSES_FILE
+        address_source_file_path = self.settings.DEFAULT_REAL_ADDRESSES_FILE
 
         match True:
-            case _ if not from_real_dataset:
+            case _ if not real_address:
                 address = self._normalize_address_str(self.fake.address())
                 tail_component = address.split(', ')[-1]
                 osm_url = f"https://www.openstreetmap.org/search?query={quote(tail_component)}"
@@ -316,3 +316,8 @@ class FakeGeoGenerator:
                     f"Could not find a valid address after {self.settings.MAX_TRIES_ADDRESS_GENERATION} attempts "
                     f"for country: {rand_country_from_source}"
                 )
+
+
+@lru_cache(maxsize=1)
+def init_fake_geo_generator(seed: int = 42) -> FakeGeoGenerator:
+    return FakeGeoGenerator(seed=seed)
