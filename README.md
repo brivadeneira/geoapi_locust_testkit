@@ -15,11 +15,8 @@ Custom locust-based python test suite for dynamic API testing with geo-faker par
 
 ### 📍🏔️ Generate coordinates on land
 
-<script
-  src="https://asciinema.org/a/c074f46d-6dfa-4c88-b032-326a6932bfea.js"
-  id="asciicast-c074f46d-6dfa-4c88-b032-326a6932bfea"
-  async>
-</script>
+[![asciicast](https://asciinema.org/a/1272850.svg)](https://asciinema.org/a/1272850)
+> *When viewing a recording just pause the player and copy-paste the content you want. It's just text after all!*
 
 ```python
 >>> from services.geo_data_generator import FakeGeoGenerator
@@ -36,6 +33,8 @@ Custom locust-based python test suite for dynamic API testing with geo-faker par
  [![](img/on_land_ex.png)](https://www.openstreetmap.org/?mlat=59.89500309878519&mlon=-166.07357393960402&zoom=10)
 
 ### 📍🏞️ Generate coordinates inside a given bounding box (bbox)
+
+[![asciicast](https://asciinema.org/a/1272853.svg)](https://asciinema.org/a/1272853)
 
 ```python
 >> > from services.geo_data_generator import FakeGeoGenerator
@@ -57,6 +56,8 @@ Custom locust-based python test suite for dynamic API testing with geo-faker par
 
 
 ### 📍🏞️ Generate coordinates inside a given bounding box (bbox) and ensure they are on land
+
+[![asciicast](https://asciinema.org/a/1272856.svg)](https://asciinema.org/a/1272856)
 
 ```python
 >> > from services.geo_data_generator import FakeGeoGenerator
@@ -98,6 +99,8 @@ Custom locust-based python test suite for dynamic API testing with geo-faker par
 
 
 ### Generate a random address with "real" address option enabled
+
+[![asciicast](https://asciinema.org/a/1272858.svg)](https://asciinema.org/a/1272858)
 
 ```python
 >> > from services.geo_data_generator import FakeGeoGenerator
