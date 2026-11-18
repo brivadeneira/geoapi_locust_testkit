@@ -1,6 +1,10 @@
 [![forthebadge made-with-python](http://ForTheBadge.com/images/badges/made-with-python.svg)](https://www.python.org/)
 [![ForTheBadge built-with-love](http://ForTheBadge.com/images/badges/built-with-love.svg)](https://GitHub.com/brivadeneira/)
 
+<img width="250" height="82" alt="image" src="https://github.com/user-attachments/assets/5f23d189-42b1-4b06-9688-d730e8779f9f" />
+
+human-made project
+
 
 # geoapi_locust_testkit
 A Python-based geographic **API testing toolkit built *on top of `Locust`*.
