@@ -3,7 +3,7 @@ import pytest
 from faker import Faker
 from shapely.geometry import box
 
-from conf.geo_data_generator_settings import GeoDataGeneratorSettings
+from config.geo_data_generator_settings import GeoDataGeneratorSettings
 from services.geo_data_generator import FakeGeoGenerator
 
 
@@ -31,7 +31,7 @@ def fake_bbox():
 
 @pytest.fixture(scope="session")
 def fake_bbox_on_land(fake_geo_generator):
-    point_on_land = random.choice(fake_geo_generator.land_polygons).centroid
+    point_on_land = random.choice(fake_geo_generator.land_polygons_from_shapefile).centroid
     buffer_in_degrees = 1.0
     return box(
         minx=point_on_land.x - buffer_in_degrees,
