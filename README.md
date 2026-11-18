@@ -87,7 +87,7 @@ Custom locust-based python test suite for dynamic API testing with geo-faker par
 >> >
 >> > fake_geo_generator = FakeGeoGenerator()
 >>> fake_geo_generator.generate_address(from_real_dataset=False)
-{'full_address': 'Avenida de Nascimento, S/N, 7440-299 Ponta Delgada', 'osm_url': 'https://www.openstreetmap.org/search?query=7440-299%20Ponta%20Delgada'}
+{'address': 'Avenida de Nascimento, S/N, 7440-299 Ponta Delgada', 'osm_url': 'https://www.openstreetmap.org/search?query=7440-299%20Ponta%20Delgada'}
 
 ```
 [![](img/ponta_delgada.png)](https://www.openstreetmap.org/search?query=7440-299%20Ponta%20Delgada)
@@ -95,7 +95,7 @@ Custom locust-based python test suite for dynamic API testing with geo-faker par
 ```
 >>>
 >>> fake_geo_generator.generate_address(from_real_dataset=False)
-{'full_address': 'Alameda Nascimento, S/N, 1143-227 Montijo', 'osm_url': 'https://www.openstreetmap.org/search?query=1143-227%20Montijo'}
+{'address': 'Alameda Nascimento, S/N, 1143-227 Montijo', 'osm_url': 'https://www.openstreetmap.org/search?query=1143-227%20Montijo'}
 ```
 
 [![](img/montijo.png)](https://www.openstreetmap.org/search?query=1143-227%20Montijo)
@@ -111,7 +111,7 @@ Custom locust-based python test suite for dynamic API testing with geo-faker par
 >> > fake_geo_generator = FakeGeoGenerator(seed=42)
 >> > real_address = fake_geo_generator.generate_address(from_real_dataset=True)
 >> > real_address
-{'full_address': 'Koblen 2, SG, 9404, SWITZERLAND', 'osm_url': 'https://www.openstreetmap.org/search?query=Koblen%202%2C%20SG%2C%209404%2C%20SWITZERLAND'}
+{'address': 'Koblen 2, SG, 9404, SWITZERLAND', 'osm_url': 'https://www.openstreetmap.org/search?query=Koblen%202%2C%20SG%2C%209404%2C%20SWITZERLAND'}
 ```
 
 [![](img/SWITZERLAND.png)](https://www.openstreetmap.org/search?query=Koblen%202%2C%20SG%2C%209404%2C%20SWITZERLAND)

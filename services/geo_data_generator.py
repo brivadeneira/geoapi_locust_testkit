@@ -253,7 +253,7 @@ class FakeGeoGenerator:
                 osm_url = f"https://www.openstreetmap.org/search?query={quote(tail_component)}"
 
                 return {
-                    "full_address": address,
+                    "address": address,
                     "osm_url": osm_url
                 }
 
@@ -308,7 +308,7 @@ class FakeGeoGenerator:
                     osm_url = f"https://www.openstreetmap.org/search?query={quote(address)}"
 
                     return {
-                        "full_address": address,
+                        "address": address,
                         "osm_url": osm_url
                     }
 
