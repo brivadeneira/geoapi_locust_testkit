@@ -178,7 +178,7 @@ class CustomLocustClient(HttpUser):
         self.client.headers.update({
             "User-Agent": (
                 "geo_locust/0.1.0 "
-                "(geographic API testing; contact: YOUR_EMAIL)"
+                "(geographic API testing;)"
             ),
             "Accept": "application/json",
         })
@@ -391,7 +391,7 @@ class CustomLocustClient(HttpUser):
 
             logging.info(
                 "Generated fake address | "
-                f"address={generated_address['full_address']} | "
+                f"address={generated_address['address']} | "
                 f"osm_url={generated_address['osm_url']}"
             )
 

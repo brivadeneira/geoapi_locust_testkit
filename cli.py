@@ -65,7 +65,7 @@ def load_test(
             help="Wait between tasks in minutes.",
         ),
         headless: bool = typer.Option(
-            default=False,
+            default=True,
             help="Run without the web interface.",
         ),
 ) -> None:
