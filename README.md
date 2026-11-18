@@ -77,6 +77,9 @@ Custom locust-based python test suite for dynamic API testing with geo-faker par
 [![](img/malvinas_argentinas_ex.png)](https://www.openstreetmap.org/?mlat=-51.57757752514003&mlon=-59.26370453286179&zoom=7)
 
 ### 📫 Generate a random address
+
+`>_` [watch terminal recording](https://asciinema.org/a/1272857)
+
 > Note: force locale to `pt_PT` for Portuguese addresses
 
 ```python
@@ -100,7 +103,7 @@ Custom locust-based python test suite for dynamic API testing with geo-faker par
 
 ### Generate a random address with "real" address option enabled
 
-[![asciicast](https://asciinema.org/a/1272858.svg)](https://asciinema.org/a/1272858)
+`>_` [watch terminal recording](https://asciinema.org/a/1272858)
 
 ```python
 >> > from services.geo_data_generator import FakeGeoGenerator
