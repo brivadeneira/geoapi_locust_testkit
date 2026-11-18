@@ -15,7 +15,7 @@ Custom locust-based python test suite for dynamic API testing with geo-faker par
 
 ### 📍🏔️ Generate coordinates on land
 
-[![asciicast](https://asciinema.org/a/1272850.svg)](https://asciinema.org/a/1272850)
+`>_` [watch terminal recording](https://asciinema.org/a/1272850)
 > *When viewing a recording just pause the player and copy-paste the content you want. It's just text after all!*
 
 ```python
@@ -34,7 +34,7 @@ Custom locust-based python test suite for dynamic API testing with geo-faker par
 
 ### 📍🏞️ Generate coordinates inside a given bounding box (bbox)
 
-[![asciicast](https://asciinema.org/a/1272853.svg)](https://asciinema.org/a/1272853)
+`>_` [watch terminal recording](https://asciinema.org/a/1272853)
 
 ```python
 >> > from services.geo_data_generator import FakeGeoGenerator
@@ -57,7 +57,7 @@ Custom locust-based python test suite for dynamic API testing with geo-faker par
 
 ### 📍🏞️ Generate coordinates inside a given bounding box (bbox) and ensure they are on land
 
-[![asciicast](https://asciinema.org/a/1272856.svg)](https://asciinema.org/a/1272856)
+`>_` [watch terminal recording](https://asciinema.org/a/1272856)
 
 ```python
 >> > from services.geo_data_generator import FakeGeoGenerator
